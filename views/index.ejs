@@ -6,5 +6,20 @@
         <p id="main-footer">New Yok Times Edition</p>
     </div>
 
+    <hr>
 
-    <% include ./partials/footer %>
+    <% results.forEach((result) => { %>
+        <div class="ui yellow segment">
+            <h2>
+                <%= result.link %>
+            </h2>
+            <hr>
+            <p>
+                <%= result.body %>
+            </p>
+        </div>
+        <% }) %>
+
+
+
+            <% include ./partials/footer %>
