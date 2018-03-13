@@ -1,0 +1,18 @@
+        body {
+        background-image: url("/assets/images/philip-strong-213128-unsplash.jpg");
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+    }
+    
+    .ui.menu {
+        background-color: #969696;
+    }
+    
+    .nav-text {
+        color: white;
+        text-shadow: 1px 2px 4px rgba(0, 0, 0, 0.9), 1px 3px 3px rgba(0, 0, 0, 0.2);
+    }
+    
+    .ui.inverted.segment {
+        background-color: #969696;
