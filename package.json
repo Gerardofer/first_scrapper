@@ -1,0 +1,26 @@
+{
+  "name": "first_scrapper",
+  "version": "1.0.0",
+  "description": "App that will scrape latest articles from the NY Times",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Gerardofer/first_scrapper.git"
+  },
+  "author": "Gerardo Fernandez",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Gerardofer/first_scrapper/issues"
+  },
+  "homepage": "https://github.com/Gerardofer/first_scrapper#readme",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "ejs": "^2.5.7",
+    "express": "^4.16.3",
+    "mongoose": "^5.0.10"
+  }
+}
