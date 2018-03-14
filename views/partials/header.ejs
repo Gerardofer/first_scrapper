@@ -11,7 +11,7 @@
 
 <body>
     <div class="ui menu">
-        <a class="item" href=>
+        <a class="item" href="/">
             <h2 class="nav-text">Scrapper 2.0</h2>
         </a>
         <a class="item" href="#">
@@ -20,8 +20,10 @@
         <a class="item" href="#">
             <h3 class="nav-text">Saved Articles</h3>
         </a>
-        <div class="ui inverted segment">
-            <button class="ui inverted basic large button">Scrape Articles</button>
-        </div>
+        <form action="/articles" method: "POST">
+            <div class="ui inverted segment">
+                <button type="submit" class="ui inverted basic large button">Scrape Articles</button>
+            </div>
+        </form>
 
     </div>

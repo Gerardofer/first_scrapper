@@ -1,34 +1,40 @@
 const request = require("request");
 const cheerio = require("cheerio");
+const axios = require("axios");
 
 var db = require("../models");
 
-
 module.exports = (app) => {
-    app.get("/", (req, res) => {
-        res.redirect("/articles");
-    });
+    // app.get("/", (req, res) => {
+    //     // res.redirect("/articles");
+    //     res.render("home");
+    // });
 
-    app.get("/articles", (req, res) => {
-        request("https://www.nytimes.com", function(err, response, html) {
+    // app.get("/articles", (req, res) => {
+    //     res.render("index");
+    // })
 
-            var $ = cheerio.load(html);
+    // app.post("/articles", (req, res) => {
+    //     axios.get("https://www.nytimes.com").then((response) => {
+    //         var $ = cheerio.load(response.data);
+    //         var clip = {};
 
-            var result = {};
+    //         $("article h2").each((i, element) => {
 
-            $("article h2").each(function(i, element) {
+    //             clip.link = $(element).children("a").attr("href");
+    //             clip.body = $(element).children("a").text();
 
-                result.link = $(element).children("a").attr("href");
-                result.body = $(element).children("a").text();
+    //             db.Headline.create(clip, (err, newClip) => {
+    //                 if (err) {
+    //                     console.log(err);
+    //                 } else {
+    //                     console.log("Articles Posted in the Data Base");
+    //                 }
+    //             })
+    //         });
 
-                db.Headline.create(result)
-                    .then(function(dbResult) {
-                        console.log(dbResult);
-                        res.render("index", { results: result });
-                    });
-                // console.log(result);
-            })
-        });
+    //     });
 
-    })
-}
+    // })
+
+};

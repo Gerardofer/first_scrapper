@@ -1,5 +1,5 @@
 body {
-    background-image: url("/assets/images/philip-strong-213128-unsplash.jpg");
+    background-image: url("/assets/images/rawpixel-com-247361-unsplash.jpg");
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
@@ -33,5 +33,5 @@ body {
 }
 
 .container.footer {
-    margin-top: 50%;
+    margin-top: 22.5%;
 }
