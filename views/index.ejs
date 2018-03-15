@@ -5,8 +5,11 @@
 
             <p id="main-footer">New Yok Times Edition</p>
         </div>
+        <h1>
+            <%= articles %>
+        </h1>
 
-        <% articles.forEach((article) => { %>
+        <% articles.forEach((article) => { %> -->
             <div class="ui grid">
                 <div class="twelve wide column centered">
                     <div class="ui yellow segment">
@@ -25,13 +28,15 @@
                                 </p>
                             </div>
                             <div class="one wide column">
-                                <a href="/articles/<%= article._id %>"><button class="ui yellow basic button right floated">View</button></a>
+                                <form action="/articles" method="POST">
+                                    <button class="ui yellow basic button right floated">Save Article</button>
+                                </form>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <% }) %>
+            <% }); %>
     </div>
 
     <% include ./partials/footer %>

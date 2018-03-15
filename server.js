@@ -41,41 +41,25 @@ app.get("/", (req, res) => {
 });
 
 // --------  GET Route to render all the articles  -----------------//
-app.get("/articles", (req, res) => {
-    Headline.find({}, (err, articles) => {
-        if (err) {
-            console.log(err);
-            res.redirect("/");
-        } else {
-            res.render("index", { articles: articles });
-        }
-    });
-});
 
-// --------  POST Route to save results to the database  -----------//
-app.post("/articles", (req, res) => {
+app.get("/articles", (req, res) => {
     axios.get("https://www.nytimes.com").then((response) => {
         var $ = cheerio.load(response.data);
-        var clip = {};
+        var articles = {};
 
         $("article h2").each((i, element) => {
 
-            clip.link = $(element).children("a").attr("href");
-            clip.body = $(element).children("a").text();
+            articles.link = $(element).children("a").attr("href");
+            articles.body = $(element).children("a").text();
 
-            console.log(clip.link);
-            console.log(clip.body);
-            console.log(clip)
-
-            Headline.create(clip).then((dbHeadline) => {
-                console.log(dbHeadline);
-            });
+            // console.log(clip.link);
+            // console.log(clip.body);
+            console.log(articles);
         });
-        res.redirect("/articles");
-
+        res.render("index", { articles: articles });
     });
 });
-//  -------------------  GET route to show specific item  ------------------  //
+//  -------------------  GET route to show specific item  -----------------  //
 app.get("/articles/:id", (req, res) => {
     let id = req.params.id;
     Headline.findById(id, (err, articleFound) => {
