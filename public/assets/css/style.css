@@ -35,3 +35,15 @@ body {
 .container.footer {
     margin-top: 22.5%;
 }
+
+.article-body {
+    font-size: 20px;
+}
+
+.article-results {
+    overflow-wrap: break-word;
+}
+
+div.eleven.wide.column {
+    margin-right: 135px;
+}

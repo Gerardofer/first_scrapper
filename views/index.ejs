@@ -1,19 +1,37 @@
 <% include ./partials/header %>
+    <div class="container">
+        <div class="ui piled segment">
+            <h1 id="main-header">Mongo Scrapper</h1>
 
-    <div class="ui piled segment">
-        <h1 id="main-header">Mongo Scrapper</h1>
+            <p id="main-footer">New Yok Times Edition</p>
+        </div>
 
-        <p id="main-footer">New Yok Times Edition</p>
+        <% articles.forEach((article) => { %>
+            <div class="ui grid">
+                <div class="twelve wide column centered">
+                    <div class="ui yellow segment">
+                        <h1 class="article-results">
+                            <a href="<%= article.link %>">
+                                <%= article.link.toUpperCase() %>
+                            </a>
+                        </h1>
+                        <div class="ui grid">
+                            <div class="twelve wide column centered">
+                                <hr>
+                            </div>
+                            <div class="eleven wide column">
+                                <p class="article-body">
+                                    <%= article.body %>
+                                </p>
+                            </div>
+                            <div class="one wide column">
+                                <button class="ui yellow basic button right floated">View</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <% }) %>
     </div>
-
-    <div class="ui raised very padded text container segment">
-        <h2 class="ui header">Dogs Roles with Humans</h2>
-        <p>THIS IS A GREAT PARAGRAPH</p>
-        <p>THIS IS ANOTHER GREAT PARAGRAPH</p>
-    </div>
-
-
-
-
 
     <% include ./partials/footer %>

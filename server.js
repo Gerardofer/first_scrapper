@@ -3,6 +3,7 @@ const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const cheerio = require("cheerio");
 const axios = require("axios");
+const methodOverride = require("method-override");
 const app = express();
 
 const PORT = process.env.PORT || 8080;
@@ -12,6 +13,7 @@ mongoose.connect("mongodb://localhost/mongoHeadlines");
 app.set("view engine", "ejs");
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(methodOverride("_method"));
 
 //------------------------  COLLECTIONS SET UP  -------------------------
 var HeadlineSchema = new mongoose.Schema({
@@ -40,11 +42,12 @@ app.get("/", (req, res) => {
 
 // --------  GET Route to render all the articles  -----------------//
 app.get("/articles", (req, res) => {
-    Headline.find({}, (err, allArticles) => {
+    Headline.find({}, (err, articles) => {
         if (err) {
             console.log(err);
+            res.redirect("/");
         } else {
-            res.render("index", { articles: allArticles });
+            res.render("index", { articles: articles });
         }
     });
 });
@@ -60,19 +63,18 @@ app.post("/articles", (req, res) => {
             clip.link = $(element).children("a").attr("href");
             clip.body = $(element).children("a").text();
 
-            Headline.create(clip, (err, newClip) => {
-                if (err) {
-                    console.log(err);
-                } else {
-                    console.log("Articles Posted in the Data Base");
-                }
-            })
+            console.log(clip.link);
+            console.log(clip.body);
+            console.log(clip)
+
+            Headline.create(clip).then((dbHeadline) => {
+                console.log(dbHeadline);
+            });
         });
+        res.redirect("/articles");
 
     });
-
-})
-
+});
 
 app.listen(PORT, () => {
     console.log("server listening on port", PORT);
