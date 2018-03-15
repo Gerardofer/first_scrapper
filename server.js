@@ -75,6 +75,17 @@ app.post("/articles", (req, res) => {
 
     });
 });
+//  -------------------  GET route to show specific item  ------------------  //
+app.get("/articles/:id", (req, res) => {
+    let id = req.params.id;
+    Headline.findById(id, (err, articleFound) => {
+        if (err) {
+            res.redirect("/articles");
+        } else {
+            res.render("show", { article: articleFound });
+        }
+    })
+})
 
 app.listen(PORT, () => {
     console.log("server listening on port", PORT);
