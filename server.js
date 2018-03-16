@@ -43,18 +43,28 @@ app.get("/", (req, res) => {
 // --------  GET Route to render all the articles  -----------------//
 
 app.get("/articles", (req, res) => {
+    Headline.find({}, (err, allArticles) => {
+        if (err){
+            res.redirect("/");
+        } else {
+            res.render("index", {articles: allArticles});
+        }
+    })
+})
+
+//------  GET Route to scrap the content from the website and post to the database------// 
+
+app.get("/scrapped", (req, res) => {
     axios.get("https://www.nytimes.com").then((response) => {
         var $ = cheerio.load(response.data);
-        var articles = {};
 
         $("article h2").each((i, element) => {
+            var articles = {
+                link: $(element).children("a").attr("href"),
+                body: $(element).children("a").text()
+            };
 
-            articles.link = $(element).children("a").attr("href");
-            articles.body = $(element).children("a").text();
-
-            // console.log(clip.link);
-            // console.log(clip.body);
-            console.log(articles);
+            // console.log(articles);
         });
         res.render("index", { articles: articles });
     });
