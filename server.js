@@ -19,11 +19,9 @@ app.use(methodOverride("_method"));
 var HeadlineSchema = new mongoose.Schema({
     link: {
         type: String,
-        required: true
     },
     body: {
         type: String,
-        required: true
     },
     // note: {
     //     type: Schema.Types.ObjectId,
@@ -61,13 +59,17 @@ app.get("/scrapped", (req, res) => {
         $("article h2").each((i, element) => {
             var articles = {
                 link: $(element).children("a").attr("href"),
-                body: $(element).children("a").text()
+                body: $(element).children("a").text(),
+                saved: false
             };
-
-            // console.log(articles);
+            Headline.create(articles, (err, postedArticles) => {
+                if (err) {
+                    console.log(err);
+                }
+            });
         });
-        res.render("index", { articles: articles });
     });
+    res.redirect("/articles")
 });
 //  -------------------  GET route to show specific item  -----------------  //
 app.get("/articles/:id", (req, res) => {
