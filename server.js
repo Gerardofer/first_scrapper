@@ -17,12 +17,10 @@ app.use(methodOverride("_method"));
 
 //------------------------  COLLECTIONS SET UP  -------------------------
 var HeadlineSchema = new mongoose.Schema({
-    link: {
-        type: String,
-    },
-    body: {
-        type: String,
-    },
+    link: String,
+    header: String,
+    body: String,
+    saved: false
     // note: {
     //     type: Schema.Types.ObjectId,
     //     ref: "Note"
@@ -54,34 +52,38 @@ app.get("/articles", (req, res) => {
 app.get("/scrapped", (req, res) => {
     axios.get("https://www.nytimes.com").then((response) => {
         var $ = cheerio.load(response.data);
+        var articles = {};
 
-        $("article h2").each((i, element) => {
-            var articles = {
-                link: $(element).children("a").attr("href"),
-                body: $(element).children("a").text(),
-                saved: false
-            };
-            Headline.create(articles, (err, postedArticles) => {
-                if (err) {
-                    console.log(err);
-                }
-            });
+        $("div.collection article").each((i, element) => {
+            
+                articles.link = $(element).find("h2").children("a").attr("href");
+                articles.header = $(element).find("h2").children("a").text();
+                articles.body = $(element).find("p.summary").text();
+                articles.saved = false;
+            
+            if (articles.link && articles.header && articles.body){
+                Headline.create(articles, (err, postedArticles) => {
+                    if (err) {
+                        console.log(err);
+                    }
+                });
+            }
         });
     });
-    res.redirect("/articles")
+    res.redirect("/articles");
 });
 
 //  GET route to update the "saved" property to "true".
 app.get("/saved/:id", (req, res) => {
-    let id = req.params.id
+    let id = req.params.id;
     Headline.findByIdAndUpdate(id, {$set : {saved : true}}, (err, savedArticle) => {
         if (err) {
             console.log(err);
         } else {
             res.redirect("/articles");
         }
-    })
-})
+    });
+});
 
 //  -----------------  GET route to get all "Saved" articles ----------------------//
 
