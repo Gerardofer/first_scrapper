@@ -38,6 +38,27 @@ app.get("/", (req, res) => {
     res.render("home");
 });
 
+//------  GET Route to scrap the content from the website and post to the database------// 
+app.get("/scrapped", (req, res) => {
+    axios.get("https://www.nytimes.com").then((response) => {
+        var $ = cheerio.load(response.data);
+        var articles = {};
+
+        $("article h2").each((i, element) => {
+            
+                articles.link = $(element).children("a").attr("href");
+                articles.body = $(element).children("a").text();
+                articles.saved = false;
+        });
+        Headline.create(articles, (err, postedArticles) => {
+            if (err) {
+                console.log(err);
+            }
+        });
+    });
+    res.redirect("/articles")
+});
+
 // --------  GET Route to render all the articles  -----------------//
 
 app.get("/articles", (req, res) => {
@@ -50,27 +71,6 @@ app.get("/articles", (req, res) => {
     })
 })
 
-//------  GET Route to scrap the content from the website and post to the database------// 
-
-app.get("/scrapped", (req, res) => {
-    axios.get("https://www.nytimes.com").then((response) => {
-        var $ = cheerio.load(response.data);
-
-        $("article h2").each((i, element) => {
-            var articles = {
-                link: $(element).children("a").attr("href"),
-                body: $(element).children("a").text(),
-                saved: false
-            };
-            Headline.create(articles, (err, postedArticles) => {
-                if (err) {
-                    console.log(err);
-                }
-            });
-        });
-    });
-    res.redirect("/articles")
-});
 //  -------------------  GET route to show specific item  -----------------  //
 app.get("/articles/:id", (req, res) => {
     let id = req.params.id;
