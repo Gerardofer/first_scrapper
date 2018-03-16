@@ -71,18 +71,30 @@ app.get("/scrapped", (req, res) => {
     res.redirect("/articles")
 });
 
-//  -------------------  GET route to show specific item  -----------------  //
-app.get("/articles/:id", (req, res) => {
+//  -----------------  GET route to get all "Saved" articles ----------------------//
+app.get("/articles/saved", (req, res) => {
+    Headline.find().where({saved: true}, (err, savedArticle) => {
+        if(err) {
+            res.redirect("/articles");
+        } else {
+            res.render("show", {savedArtice: savedArticle});
+        }
+    });
+});
+
+//  -------------------  PUT route to update article to "save" specific item  -----------------  //
+//Check put statement
+app.put("/articles/save/:id", (req, res) => {
     let id = req.params.id;
-    Headline.findById(id, (err, articleFound) => {
+    Headline.findByIdAndUpdate(id, {$set: {saved: true}}, (err, articleUpdate) => {
         if (err) {
             res.redirect("/articles");
         } else {
-            res.render("show", { article: articleFound });
+            res.redirect("/articles/saved");
         }
-    })
-})
+    });
+});
 
 app.listen(PORT, () => {
     console.log("server listening on port", PORT);
-})
+});
