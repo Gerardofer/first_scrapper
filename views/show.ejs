@@ -1,12 +1,13 @@
 <% include ./partials/header %>
+
     <div class="container">
         <div class="ui piled segment">
             <h1 id="main-header">Mongo Scrapper</h1>
 
             <p id="main-footer">New Yok Times Edition</p>
         </div>
-
-        <% savedArticle.forEach((article) => { %> -->
+        
+        <% savedArticle.forEach((article) => { %>
             <div class="ui grid">
                 <div class="twelve wide column centered">
                     <div class="ui yellow segment">
@@ -19,26 +20,29 @@
                             <div class="twelve wide column centered">
                                 <hr>
                             </div>
-                            <div class="ten wide column">
-                                <p class="article-body">
-                                    <%= article.body %>
-                                </p>
+                            <div class="ui right aling grid">
+                                <div class="twelve wide column">
+                                    <p class="article-body">
+                                        <%= article.body %>
+                                    </p>
+                                </div>
                             </div>
-                            <div class="one wide column">
-                                <form action="/articles/saved/<%= article._id %>?_method=PUT" method="POST">
-                                    <button class="ui yellow basic button right floated">Add Comment</button>
-                                </form>
+                            <div class="ui center align grid">
+                                <div class="three column">
+                                    <a href="/saved/<%= article._id %>"><button id="article-save" type="submit" class="ui yellow basic button">Add a Note</button></a>
+                                </div>
                             </div>
-                            <div class="one wide column">
-                                <form action="/articles/saved/<%= article._id %>?_method=PUT" method="POST">
-                                    <button class="ui yellow basic button right floated">Delete Comment</button>
-                                </form>
+                            <div class="ui left right align grid">
+                                <div class="two column">
+                                    <a href="/saved/<%= article._id %>"><button id="article-save" type="submit" class="ui yellow basic button">Delete Article</button></a>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
             <% }); %>
-    </div>
+
+    
 
     <% include ./partials/footer %>
