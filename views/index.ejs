@@ -25,9 +25,7 @@
                                 </p>
                             </div>
                             <div class="one wide column">
-                                <form action="/articles/saved/<%= article._id %>?_method=PUT" method="POST">
-                                    <button class="ui yellow basic button right floated">Save Article</button>
-                                </form>
+                                <a href="/saved/<%= article._id %>"><button id="article-save" type="submit" class="ui yellow basic button right floated">Save Article</button></a>
                             </div>
                         </div>
                     </div>
