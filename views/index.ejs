@@ -5,9 +5,6 @@
 
             <p id="main-footer">New Yok Times Edition</p>
         </div>
-        <h1>
-            <%= articles %>
-        </h1>
 
         <% articles.forEach((article) => { %> -->
             <div class="ui grid">
@@ -15,7 +12,7 @@
                     <div class="ui yellow segment">
                         <h1 class="article-results">
                             <a href="<%= article.link %>">
-                                <%= article.link.toUpperCase() %>
+                                <%= article.link %>
                             </a>
                         </h1>
                         <div class="ui grid">
