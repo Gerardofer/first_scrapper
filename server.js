@@ -39,6 +39,7 @@ app.get("/", (req, res) => {
 // --------  GET Route to render all the articles  -----------------//
 
 app.get("/articles", (req, res) => {
+    console.log('here2');
     Headline.find({}, (err, allArticles) => {
         if (err){
             res.redirect("/");
@@ -69,8 +70,8 @@ app.get("/scrapped", (req, res) => {
                 });
             }
         });
+        res.redirect('/articles');
     });
-    res.redirect("/articles");
 });
 
 //  GET route to update the "saved" property to "true".
