@@ -1,0 +1,59 @@
+<% include ./partials/header %>
+
+    <div class="container">
+        <div class="ui piled segment">
+            <h1 id="main-header">Mongo Scrapper</h1>
+
+            <p id="main-footer">New Yok Times Edition</p>
+        </div>
+       
+            <div class="ui grid">
+                <div class="twelve wide column centered">
+                    <div class="ui yellow segment">
+                        <h1 class="article-results">
+                            <a href="#">
+                                <%= articleNote.header %> 
+                            </a>
+                            <p>ID: <%= articleNote._id %> </p>
+                        </h1>
+                        <div class="ui grid">
+                            <div class="twelve wide column centered">
+                                <hr>
+                            </div>
+                                <div class="twelve wide column centered">
+                                    <div class="ui form">
+                                        <div class="field">
+                                            <label>Add a Note to the article</label>
+                                            <textarea name="note"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="ui center align grid">
+                                <div class="three column">
+                                    <a href="#"><button type="button" class="ui yellow big basic button note-save">Save</button></a>
+                                </div>
+                                <div class="three column">
+                                    <a href="#"><button type="button" class="ui yellow big basic button note-save">See Notes</button></a>
+                                </div>
+                                <div class="three column">
+                                        <a href="#"><button type="button" class="ui yellow big basic button note-save">Delete Article</button></a>
+                                    </div>
+                            </div>
+                            <!-- <div class="ui right align grid">
+                                <div class="two column">
+                                    <a href="#"><button id="note-delete" type="submit" class="ui yellow basic button">Delete Article</button></a>
+                                </div>
+                            </div> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        
+            
+
+
+
+
+        <% include ./partials/footer %>

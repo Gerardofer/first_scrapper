@@ -29,12 +29,7 @@
                             </div>
                             <div class="ui center align grid">
                                 <div class="three column">
-                                    <a href="#"><button type="button" class="ui yellow basic button note-save">Add a Note</button></a>
-                                </div>
-                            </div>
-                            <div class="ui left right align grid">
-                                <div class="two column">
-                                    <a href="/saved/<%= article._id %>"><button id="note-delete" type="submit" class="ui yellow basic button">Delete Article</button></a>
+                                    <a href="/articles/saved/<%= article._id %>"><button type="button" class="ui yellow basic button note-save">Add a Note</button></a>
                                 </div>
                             </div>
                         </div>
@@ -47,7 +42,7 @@
         <div class="ui modal">
             <i class="close icon"></i>
             <div class="header">
-              <%= savedArticle._id %> 
+              <%= savedArticle %> 
             </div>
             <div class="image content">
               <div class="image">

@@ -97,6 +97,18 @@ app.get("/articles/saved", (req, res) => {
     });
 });
 
+//  --------------------  GET route to get saved article  ----------------------//
+app.get("/articles/saved/:id", (req, res) => {
+    let id = req.params.id;
+    Headline.findById(id, (err, savedNote) => {
+        if (err){
+            res.redirect("/articles/saved");
+        } else {
+            res.render("note", {articleNote: savedNote})
+        }
+    })
+}) 
+
 
 app.listen(PORT, () => {
     console.log("server listening on port", PORT);
