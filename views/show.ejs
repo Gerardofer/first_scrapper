@@ -6,7 +6,7 @@
 
             <p id="main-footer">New Yok Times Edition</p>
         </div>
-        
+
         <% savedArticle.forEach((article) => { %>
             <div class="ui grid">
                 <div class="twelve wide column centered">
@@ -29,12 +29,12 @@
                             </div>
                             <div class="ui center align grid">
                                 <div class="three column">
-                                    <a href="/saved/<%= article._id %>"><button id="article-save" type="button" data-togle="modal" data-target="#note-form" class="ui yellow basic button">Add a Note</button></a>
+                                    <a href="#"><button type="button" class="ui yellow basic button note-save">Add a Note</button></a>
                                 </div>
                             </div>
                             <div class="ui left right align grid">
                                 <div class="two column">
-                                    <a href="/saved/<%= article._id %>"><button id="article-save" type="submit" class="ui yellow basic button">Delete Article</button></a>
+                                    <a href="/saved/<%= article._id %>"><button id="note-delete" type="submit" class="ui yellow basic button">Delete Article</button></a>
                                 </div>
                             </div>
                         </div>
@@ -42,6 +42,29 @@
                 </div>
             </div>
             <% }); %>
+
+                <!-- =====================THIS IS THE MODAL!!!!====================== -->
+        <div class="ui modal">
+            <i class="close icon"></i>
+            <div class="header">
+              <%= savedArticle._id %> 
+            </div>
+            <div class="image content">
+              <div class="image">
+                An image can appear on left or an icon
+              </div>
+              <div class="description">
+                A description can appear on the right
+              </div>
+            </div>
+            <div class="actions">
+              <div class="ui button">Cancel</div>
+              <div class="ui button">OK</div>
+            </div>
+          </div>
+        
+        <!-- =======================THIS IS THE END OF THE MODAL!!!!=========================== -->
+
 
     
 
