@@ -40,10 +40,18 @@ body {
     font-size: 15px;
 }
 
+.home-paragraph {
+    font-size: 1.75rem;
+}
+
 .article-results {
     overflow-wrap: break-word;
 }
 
 div.eleven.wide.column {
     margin-right: 135px;
+}
+
+.ui.form .field {
+    margin-left: 7.5em;
 }

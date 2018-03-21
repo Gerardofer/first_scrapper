@@ -4,7 +4,7 @@
         <div class="ui piled segment">
             <h1 id="main-header">Mongo Scrapper</h1>
 
-            <p id="main-footer">New Yok Times Edition</p>
+            <p id="main-footer">New York Times Edition</p>
         </div>
 
         <% savedArticle.forEach((article) => { %>
@@ -29,7 +29,7 @@
                             </div>
                             <div class="ui center align grid">
                                 <div class="three column">
-                                    <a href="/articles/saved/<%= article._id %>"><button type="button" class="ui yellow basic button note-save">Add a Note</button></a>
+                                    <a href="/articles/saved/edit/<%= article._id %>"><button type="button" class="ui yellow basic button note-save">Add a Note</button></a>
                                 </div>
                             </div>
                         </div>

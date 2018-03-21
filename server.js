@@ -15,16 +15,26 @@ app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
 
-//------------------------  COLLECTIONS SET UP  -------------------------
-var HeadlineSchema = new mongoose.Schema({
+//------------------------  COLLECTIONS SET UP  -------------------------//
+
+let Schema = mongoose.Schema
+//Note Collection
+
+var NoteSchema = new Schema({
+    note: String
+});
+
+let Note = mongoose.model("Note", NoteSchema);
+//Article Collection
+var HeadlineSchema = new Schema({
     link: String,
     header: String,
     body: String,
-    saved: false
-    // note: {
-    //     type: Schema.Types.ObjectId,
-    //     ref: "Note"
-    // }
+    saved: false,
+    note: {
+        type: Schema.Types.ObjectId,
+        ref: "Note"
+    }
 });
 
 var Headline = mongoose.model("Headline", HeadlineSchema);
@@ -98,16 +108,39 @@ app.get("/articles/saved", (req, res) => {
 });
 
 //  --------------------  GET route to get saved article  ----------------------//
-app.get("/articles/saved/:id", (req, res) => {
+app.get("/articles/saved/edit/:id", (req, res) => {
     let id = req.params.id;
-    Headline.findById(id, (err, savedNote) => {
-        if (err){
-            res.redirect("/articles/saved");
-        } else {
+    Headline.findById(id).populate("note").then(savedNote => {
             res.render("note", {articleNote: savedNote})
+        }).catch(err => {
+            console.log(err);
+        });
+});
+
+//  ---------------  POST route to create a new note and update with new notes -----//
+app.post("/articles/saved/:id", (req, res) => {
+    Note.create(req.body.newNote, (err, updatedNote) => {
+        if(err) {
+            res.redirect("/articles/saved")
+        } else {
+            res.redirect("/articles/saved/" + req.params.id)
         }
     })
-}) 
+})
+// app.post("/articles/saved/:id", (req, res) => {
+//     let id = req.params.id
+//     let note = req.body.note;
+
+//     console.log(note);
+    // Note.create(note).then(newNote => {
+    //     return Headline.findByIdAndUpdate({id: id}, {note: newNote._id}, {new: true}).then(savedNote => {
+    //         res.render("note", {articleNote: savedNote})
+    //         console.log(note)
+    //     }).catch(err => {
+    //         console.log (err)
+    //     })
+    // })
+// })
 
 
 app.listen(PORT, () => {
