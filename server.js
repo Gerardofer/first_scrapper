@@ -119,13 +119,7 @@ app.get("/articles/saved/edit/:id", (req, res) => {
 
 //  ---------------  POST route to create a new note and update with new notes -----//
 app.post("/articles/saved/:id", (req, res) => {
-    Note.create(req.body.newNote, (err, updatedNote) => {
-        if(err) {
-            res.redirect("/articles/saved")
-        } else {
-            res.redirect("/articles/saved/" + req.params.id)
-        }
-    })
+    Note
 })
 // app.post("/articles/saved/:id", (req, res) => {
 //     let id = req.params.id
