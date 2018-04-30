@@ -21,11 +21,11 @@
     "axios": "^0.18.0",
     "body-parser": "^1.18.2",
     "cheerio": "^1.0.0-rc.2",
-    "ejs": "^2.5.7",
+    "ejs": "^2.5.9",
     "express": "^4.16.3",
     "method-override": "^2.3.10",
-    "mongoose": "^5.0.10",
-    "nodemon": "^1.17.2",
+    "mongoose": "^5.0.16",
+    "nodemon": "^1.17.3",
     "request": "^2.85.0"
   }
 }
